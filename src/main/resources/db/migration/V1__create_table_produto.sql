@@ -3,8 +3,6 @@ CREATE TABLE produto (
     nome VARCHAR(255) NOT NULL,
     descricao TEXT,
     preco DECIMAL(10,2) NOT NULL,
-    quantidade_estoque INT NOT NULL DEFAULT 0,
-    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    data_atualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    quantidade_estoque INT DEFAULT 0,
     ativo BOOLEAN DEFAULT TRUE
 );

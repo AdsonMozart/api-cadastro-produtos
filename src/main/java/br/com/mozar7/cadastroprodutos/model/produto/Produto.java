@@ -1,4 +1,4 @@
-package br.com.mozar7.cadastroprodutos.model;
+package br.com.mozar7.cadastroprodutos.model.produto;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -30,14 +30,8 @@ public class Produto {
     @Column(nullable = false)
     private BigDecimal preco;
 
-    @Column(name = "quantidade_estoque", nullable = false)
+    @Column(name = "quantidade_estoque")
     private Integer quantidadeEstoque;
-
-    @Column(name = "data_criacao", updatable = false)
-    private LocalDateTime dataCriacao;
-
-    @Column(name = "data_atualizacao")
-    private LocalDateTime dataAtualizacao;
 
     private Boolean ativo = true;
 }
