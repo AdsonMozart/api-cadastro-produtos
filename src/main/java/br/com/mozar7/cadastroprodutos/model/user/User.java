@@ -32,6 +32,13 @@ public class User implements UserDetails {
 
     private UserRole role;
 
+    // Construtor exclusivo
+    public User(String login, String senha, UserRole role){
+        this.login = login;
+        this.senha = senha;
+        this.role = role;
+    }
+
 
     // Métodos obrigatórios do UserDetails
     @Override
