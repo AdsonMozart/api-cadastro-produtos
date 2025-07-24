@@ -1,6 +1,8 @@
 package br.com.mozar7.cadastroprodutos.controller;
 
+import br.com.mozar7.cadastroprodutos.infra.security.TokenService;
 import br.com.mozar7.cadastroprodutos.model.dto.AuthenticationDTO;
+import br.com.mozar7.cadastroprodutos.model.dto.LoginResponseDTO;
 import br.com.mozar7.cadastroprodutos.model.dto.RegisterDTO;
 import br.com.mozar7.cadastroprodutos.model.user.User;
 import br.com.mozar7.cadastroprodutos.repository.UserRepository;
@@ -25,11 +27,15 @@ public class AuthenticationController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping("/login")
-    public ResponseEntity<Void> login(@RequestBody @Validated AuthenticationDTO dados) {
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody @Validated AuthenticationDTO dados) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
         var auth = this.authenticationManager.authenticate(usernamePassword);
-        return ResponseEntity.ok().build();
+        var token = tokenService.generateToken((User) auth.getPrincipal());
+        return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
     @PostMapping("/register")
